@@ -32,17 +32,27 @@ async function initialLoad (){
 
 arr.forEach((x, idx) => {
   breeds.push(arr[idx].breeds[0].name)
-  //breeds.push(x)
+})
+
+breeds.forEach((x) => {
+  const optionEl = document.createElement("option");
+  optionEl.textContent = x;
+  breedSelect.appendChild(optionEl);
 })
 
   console.log(arr[0].breeds[0].name);
 }
+
+// const optionEl = document.createElement("option");
+// optionEl.textContent = "helllllo"
+// breedSelect.appendChild(optionEl);
 
 
 
 initialLoad();
 console.log(breeds);
 console.log("hello");
+
 
 /**
  * 2. Create an event handler for breedSelect that does the following:

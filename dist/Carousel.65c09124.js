@@ -12210,7 +12210,9 @@ var arr = [];
 var breeds = [];
 function initialLoad() {
   return _initialLoad.apply(this, arguments);
-}
+} // const optionEl = document.createElement("option");
+// optionEl.textContent = "helllllo"
+// breedSelect.appendChild(optionEl);
 function _initialLoad() {
   _initialLoad = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     var response, jsonData;
@@ -12230,10 +12232,14 @@ function _initialLoad() {
           });
           arr.forEach(function (x, idx) {
             breeds.push(arr[idx].breeds[0].name);
-            //breeds.push(x)
+          });
+          breeds.forEach(function (x) {
+            var optionEl = document.createElement("option");
+            optionEl.textContent = x;
+            breedSelect.appendChild(optionEl);
           });
           console.log(arr[0].breeds[0].name);
-        case 9:
+        case 10:
         case "end":
           return _context.stop();
       }
