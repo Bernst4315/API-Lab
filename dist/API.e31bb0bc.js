@@ -12266,8 +12266,7 @@ var progressBar = document.getElementById("progressBar");
 var getFavouritesBtn = document.getElementById("getFavouritesBtn");
 
 // Step 0: Store your API key here for reference and easy access.
-var API_KEY = "";
-
+var API_KEY = "live_Wnqd2JV4EMaQONaRroewu3pOgt2fHrYV38wu3pUObF4rzzClPL5jtTJnswXRX5cH";
 /**
  * 1. Create an async function "initialLoad" that does the following:
  * - Retrieve a list of breeds from the cat API using fetch().
@@ -12276,7 +12275,38 @@ var API_KEY = "";
  *  - Each option should display text equal to the name of the breed.
  * This function should execute immediately.
  */
-
+var arr = [];
+function initialLoad() {
+  return _initialLoad.apply(this, arguments);
+}
+function _initialLoad() {
+  _initialLoad = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var response, jsonData;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return fetch("https://api.thecatapi.com/v1/images/search?limit=10&api_key=".concat(API_KEY));
+        case 2:
+          response = _context.sent;
+          _context.next = 5;
+          return response.json();
+        case 5:
+          jsonData = _context.sent;
+          jsonData.forEach(function (x) {
+            arr.push(x);
+          });
+        case 7:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee);
+  }));
+  return _initialLoad.apply(this, arguments);
+}
+initialLoad();
+console.log("hello");
+console.log(arr);
 /**
  * 2. Create an event handler for breedSelect that does the following:
  * - Retrieve information on the selected breed from the cat API using fetch().
@@ -12363,14 +12393,14 @@ function favourite(_x) {
  *   your code should account for this.
  */
 function _favourite() {
-  _favourite = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(imgId) {
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) switch (_context.prev = _context.next) {
+  _favourite = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(imgId) {
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
         case 0:
         case "end":
-          return _context.stop();
+          return _context2.stop();
       }
-    }, _callee);
+    }, _callee2);
   }));
   return _favourite.apply(this, arguments);
 }
