@@ -12276,6 +12276,7 @@ var API_KEY = "live_Wnqd2JV4EMaQONaRroewu3pOgt2fHrYV38wu3pUObF4rzzClPL5jtTJnswXR
  * This function should execute immediately.
  */
 var arr = [];
+var breeds = [];
 function initialLoad() {
   return _initialLoad.apply(this, arguments);
 }
@@ -12286,7 +12287,7 @@ function _initialLoad() {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return fetch("https://api.thecatapi.com/v1/images/search?limit=10&api_key=".concat(API_KEY));
+          return fetch("https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&api_key=".concat(API_KEY));
         case 2:
           response = _context.sent;
           _context.next = 5;
@@ -12296,7 +12297,12 @@ function _initialLoad() {
           jsonData.forEach(function (x) {
             arr.push(x);
           });
-        case 7:
+          arr.forEach(function (x, idx) {
+            breeds.push(arr[idx].breeds[0].name);
+            //breeds.push(x)
+          });
+          console.log(arr[0].breeds[0].name);
+        case 9:
         case "end":
           return _context.stop();
       }
@@ -12305,8 +12311,9 @@ function _initialLoad() {
   return _initialLoad.apply(this, arguments);
 }
 initialLoad();
+console.log(breeds);
 console.log("hello");
-console.log(arr);
+
 /**
  * 2. Create an event handler for breedSelect that does the following:
  * - Retrieve information on the selected breed from the cat API using fetch().
@@ -12429,7 +12436,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61021" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63472" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

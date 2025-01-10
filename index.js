@@ -21,18 +21,29 @@ const API_KEY = "live_Wnqd2JV4EMaQONaRroewu3pOgt2fHrYV38wu3pUObF4rzzClPL5jtTJnsw
  * This function should execute immediately.
  */
 const arr = [];
+const breeds = [];
 
 async function initialLoad (){
-  const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=10&api_key=${API_KEY}`);
+  const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&api_key=${API_KEY}`);
   const jsonData = await response.json();
   jsonData.forEach((x) => {
-      arr.push(x);
+      arr.push(x);   
   })
-  
+
+arr.forEach((x, idx) => {
+  breeds.push(arr[idx].breeds[0].name)
+  //breeds.push(x)
+})
+
+  console.log(arr[0].breeds[0].name);
 }
+
+
+
 initialLoad();
+console.log(breeds);
 console.log("hello");
-console.log(arr);
+
 /**
  * 2. Create an event handler for breedSelect that does the following:
  * - Retrieve information on the selected breed from the cat API using fetch().
