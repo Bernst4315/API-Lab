@@ -12275,38 +12275,46 @@ var API_KEY = "live_Wnqd2JV4EMaQONaRroewu3pOgt2fHrYV38wu3pUObF4rzzClPL5jtTJnswXR
  *  - Each option should display text equal to the name of the breed.
  * This function should execute immediately.
  */
+
+var breeds = [];
 function initialLoad() {
   return _initialLoad.apply(this, arguments);
 }
 function _initialLoad() {
-  _initialLoad = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var breeds, response, jsonData;
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) switch (_context.prev = _context.next) {
+  _initialLoad = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var breedsId, response, jsonData;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          breeds = [];
-          _context.next = 3;
+          breedsId = [];
+          _context2.next = 3;
           return fetch("https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&api_key=".concat(API_KEY));
         case 3:
-          response = _context.sent;
-          _context.next = 6;
+          response = _context2.sent;
+          _context2.next = 6;
           return response.json();
         case 6:
-          jsonData = _context.sent;
+          jsonData = _context2.sent;
           jsonData.forEach(function (x) {
-            breeds.push(x.breeds[0].name);
+            breeds.push(x.breeds[0]);
+            //breedsId.push(x.breeds[0].id); //might want to place in an obj 
           });
           breeds.forEach(function (breed) {
             var optionEl = document.createElement("option");
-            optionEl.textContent = breed;
-            optionEl.value = breed;
+            optionEl.textContent = breed.name;
+            optionEl.value = breed.name;
+            optionEl.id = breed.id;
             breedSelect.appendChild(optionEl);
           });
-        case 9:
+          console.log(breeds);
+          console.log(breedsId);
+          console.log(jsonData);
+          //return breeds;
+        case 12:
         case "end":
-          return _context.stop();
+          return _context2.stop();
       }
-    }, _callee);
+    }, _callee2);
   }));
   return _initialLoad.apply(this, arguments);
 }
@@ -12328,10 +12336,42 @@ initialLoad();
  */
 
 breedSelect.addEventListener("click", function (x) {
+  var cats = [];
   console.log("clicked");
-  var y = x.target.value;
+  var y = x.target.id;
   console.log(y);
+  //console.log(breeds[0].id)
+  function getCatz(_x) {
+    return _getCatz.apply(this, arguments);
+  }
+  function _getCatz() {
+    _getCatz = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(y) {
+      var response, jsonData;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return fetch("https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&breed_ids=".concat(y, "&api_key=").concat(API_KEY));
+          case 2:
+            response = _context.sent;
+            _context.next = 5;
+            return response.json();
+          case 5:
+            jsonData = _context.sent;
+            jsonData.forEach(function (x) {
+              cats.push(x);
+            });
+          case 7:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee);
+    }));
+    return _getCatz.apply(this, arguments);
+  }
+  console.log(cats);
 });
+
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
  */
@@ -12383,7 +12423,7 @@ breedSelect.addEventListener("click", function (x) {
  *   you delete that favourite using the API, giving this function "toggle" functionality.
  * - You can call this function by clicking on the heart at the top right of any image.
  */
-function favourite(_x) {
+function favourite(_x2) {
   return _favourite.apply(this, arguments);
 }
 /**
@@ -12403,14 +12443,14 @@ function favourite(_x) {
  *   your code should account for this.
  */
 function _favourite() {
-  _favourite = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(imgId) {
-    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-      while (1) switch (_context2.prev = _context2.next) {
+  _favourite = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(imgId) {
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
         case 0:
         case "end":
-          return _context2.stop();
+          return _context3.stop();
       }
-    }, _callee2);
+    }, _callee3);
   }));
   return _favourite.apply(this, arguments);
 }

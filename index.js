@@ -21,22 +21,30 @@ const API_KEY = "live_Wnqd2JV4EMaQONaRroewu3pOgt2fHrYV38wu3pUObF4rzzClPL5jtTJnsw
  * This function should execute immediately.
  */
 
-
+const breeds = [];
 async function initialLoad (){
-  const breeds = [];
+  
+  const breedsId = []; 
   const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&api_key=${API_KEY}`);
   const jsonData = await response.json();
   jsonData.forEach((x) => {
-      breeds.push(x.breeds[0].name);  
+      breeds.push(x.breeds[0]); 
+      //breedsId.push(x.breeds[0].id); //might want to place in an obj 
   })
+
 
 breeds.forEach((breed) => {
   const optionEl = document.createElement("option");
-  optionEl.textContent = breed;
-  optionEl.value = breed;
+  optionEl.textContent = breed.name;
+  optionEl.value = breed.name;
+  optionEl.id = breed.id;
   breedSelect.appendChild(optionEl);
 })
 
+console.log(breeds)
+console.log(breedsId)
+console.log(jsonData)
+//return breeds;
 }
 initialLoad();
 
@@ -58,10 +66,27 @@ initialLoad();
  */
 
 breedSelect.addEventListener("click", (x) => {
+  
+  const cats = [];
   console.log("clicked");
-  let y = x.target.value
+  let y = x.target.id;
   console.log(y);
+//console.log(breeds[0].id)
+  async function getCatz(y){
+    
+     const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&breed_ids=${y}&api_key=${API_KEY}`);
+    const jsonData = await response.json();
+    jsonData.forEach((x) => {
+      cats.push(x);  
+  })
+    
+  }
+
+  console.log(cats)
+
 })
+
+
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
  */
