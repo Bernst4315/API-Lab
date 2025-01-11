@@ -20,38 +20,26 @@ const API_KEY = "live_Wnqd2JV4EMaQONaRroewu3pOgt2fHrYV38wu3pUObF4rzzClPL5jtTJnsw
  *  - Each option should display text equal to the name of the breed.
  * This function should execute immediately.
  */
-const arr = [];
-const breeds = [];
+
 
 async function initialLoad (){
+  const breeds = [];
   const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&api_key=${API_KEY}`);
   const jsonData = await response.json();
   jsonData.forEach((x) => {
-      arr.push(x);   
+      breeds.push(x.breeds[0].name);  
   })
 
-arr.forEach((x, idx) => {
-  breeds.push(arr[idx].breeds[0].name)
-})
-
-breeds.forEach((x) => {
+breeds.forEach((breed) => {
   const optionEl = document.createElement("option");
-  optionEl.textContent = x;
+  optionEl.textContent = breed;
+  optionEl.value = breed;
   breedSelect.appendChild(optionEl);
 })
 
-  console.log(arr[0].breeds[0].name);
 }
-
-// const optionEl = document.createElement("option");
-// optionEl.textContent = "helllllo"
-// breedSelect.appendChild(optionEl);
-
-
-
 initialLoad();
-console.log(breeds);
-console.log("hello");
+
 
 
 /**
@@ -69,6 +57,11 @@ console.log("hello");
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
 
+breedSelect.addEventListener("click", (x) => {
+  console.log("clicked");
+  let y = x.target.value
+  console.log(y);
+})
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
  */

@@ -12206,40 +12206,34 @@ var API_KEY = "live_Wnqd2JV4EMaQONaRroewu3pOgt2fHrYV38wu3pUObF4rzzClPL5jtTJnswXR
  *  - Each option should display text equal to the name of the breed.
  * This function should execute immediately.
  */
-var arr = [];
-var breeds = [];
 function initialLoad() {
   return _initialLoad.apply(this, arguments);
-} // const optionEl = document.createElement("option");
-// optionEl.textContent = "helllllo"
-// breedSelect.appendChild(optionEl);
+}
 function _initialLoad() {
   _initialLoad = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var response, jsonData;
+    var breeds, response, jsonData;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _context.next = 2;
+          breeds = [];
+          _context.next = 3;
           return fetch("https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&api_key=".concat(API_KEY));
-        case 2:
+        case 3:
           response = _context.sent;
-          _context.next = 5;
+          _context.next = 6;
           return response.json();
-        case 5:
+        case 6:
           jsonData = _context.sent;
           jsonData.forEach(function (x) {
-            arr.push(x);
+            breeds.push(x.breeds[0].name);
           });
-          arr.forEach(function (x, idx) {
-            breeds.push(arr[idx].breeds[0].name);
-          });
-          breeds.forEach(function (x) {
+          breeds.forEach(function (breed) {
             var optionEl = document.createElement("option");
-            optionEl.textContent = x;
+            optionEl.textContent = breed;
+            optionEl.value = breed;
             breedSelect.appendChild(optionEl);
           });
-          console.log(arr[0].breeds[0].name);
-        case 10:
+        case 9:
         case "end":
           return _context.stop();
       }
@@ -12248,8 +12242,6 @@ function _initialLoad() {
   return _initialLoad.apply(this, arguments);
 }
 initialLoad();
-console.log(breeds);
-console.log("hello");
 
 /**
  * 2. Create an event handler for breedSelect that does the following:
@@ -12266,6 +12258,11 @@ console.log("hello");
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
 
+breedSelect.addEventListener("click", function (x) {
+  console.log("clicked");
+  var y = x.target.value;
+  console.log(y);
+});
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."
  */
@@ -12442,7 +12439,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64910" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49668" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
