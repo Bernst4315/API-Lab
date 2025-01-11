@@ -1,3 +1,4 @@
+import { get } from "jquery";
 import * as Carousel from "./Carousel.js";
 import axios from "axios";
 
@@ -41,9 +42,9 @@ breeds.forEach((breed) => {
   breedSelect.appendChild(optionEl);
 })
 
-console.log(breeds)
-console.log(breedsId)
-console.log(jsonData)
+// console.log(breeds)
+// console.log(breedsId)
+// console.log(jsonData)
 //return breeds;
 }
 initialLoad();
@@ -64,25 +65,58 @@ initialLoad();
  * - Each new selection should clear, re-populate, and restart the Carousel.
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
-
-breedSelect.addEventListener("click", (x) => {
-  
-  const cats = [];
-  console.log("clicked");
-  let y = x.target.id;
-  console.log(y);
-//console.log(breeds[0].id)
+const cats = [];
+const rotateImg = document.getElementById("carouselExampleControls")
   async function getCatz(y){
     
      const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&breed_ids=${y}&api_key=${API_KEY}`);
-    const jsonData = await response.json();
-    jsonData.forEach((x) => {
-      cats.push(x);  
-  })
-    
+     const jsonData = await response.json();
+     jsonData.forEach((x) => {
+       cats.push(x);  
+   })
+  
+  
+   cats.forEach((x) => {
+    const newImg = document.createElement("img");
+    newImg.src = x.url; 
+    newImg.alt = "img of a cat"
+    rotateImg.appendChild(newImg)
+
+   })
+
   }
 
-  console.log(cats)
+
+breedSelect.addEventListener("click", (x) => {
+  
+  
+  console.log("clicked");
+  let y = x.target.id;
+  //console.log(y);
+
+  getCatz(y)
+  //console.log(cats);
+  //   cats.forEach((x) => {
+  //     console.log(x.url)
+  //   let newImg = document.createElement("img");
+  //   newImg.src = x.url; 
+  //   newImg.alt = "img of a cat"
+  //   rotateImg.appendChild(newImg)
+
+  //  })
+
+
+//console.log(breeds[0].id)
+
+
+  //console.log(cats)
+
+  // fetch(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&breed_ids=${y}&api_key=${API_KEY}`)
+  // .then(response => response.json())
+  // .then(data => console.log(data))
+
+  // let z = data[0].id
+  // console.log(z)
 
 })
 
