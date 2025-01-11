@@ -23429,7 +23429,7 @@ function initialLoad() {
 }
 function _initialLoad() {
   _initialLoad = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var breedsId, response, jsonData;
+    var breedsId, response, jsonData, y;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -23453,12 +23453,13 @@ function _initialLoad() {
             optionEl.id = breed.id;
             breedSelect.appendChild(optionEl);
           });
-
+          y = breeds[0].id;
+          getCatz(y);
           // console.log(breeds)
           // console.log(breedsId)
           // console.log(jsonData)
           //return breeds;
-        case 9:
+        case 11:
         case "end":
           return _context.stop();
       }
@@ -23653,7 +23654,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64910" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49668" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

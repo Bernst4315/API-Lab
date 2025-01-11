@@ -42,6 +42,9 @@ breeds.forEach((breed) => {
   breedSelect.appendChild(optionEl);
 })
 
+let y = breeds[0].id; 
+
+getCatz(y);
 // console.log(breeds)
 // console.log(breedsId)
 // console.log(jsonData)
