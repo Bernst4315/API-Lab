@@ -80,16 +80,20 @@ initialLoad();
  * - Each new selection should clear, re-populate, and restart the Carousel.
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
-const cats = [];
+
 const rotateImg = document.getElementById("carouselInner")
-  
+   
+
 async function getCatz(y){
-    
+   const cats = [];
+  console.log(y);
      const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&breed_ids=${y}&api_key=${API_KEY}`);
      const jsonData = await response.json();
      console.log(jsonData);
      jsonData.forEach((x) => {
        cats.push(x);  
+       //let cItem = Carousel.createCarouselItem(x.url, "image of a cat", x.id);
+    //Carousel.appendCarousel(cItem);
    })
   
   
@@ -104,13 +108,17 @@ async function getCatz(y){
 
 
 breedSelect.addEventListener("click", (x) => {
+   Carousel.clear();
    
+  
+  initialLoad()
   console.log("clicked");
   let y = x.target.id;
+  getCatz(y);
   console.log(y);
   Carousel.start();
-  Carousel.clear();
-  getCatz(y);
+  
+  
 
 })
 

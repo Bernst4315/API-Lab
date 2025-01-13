@@ -23425,35 +23425,39 @@ initialLoad();
  * - Each new selection should clear, re-populate, and restart the Carousel.
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
-var cats = [];
+
 var rotateImg = document.getElementById("carouselInner");
 function getCatz(_x) {
   return _getCatz.apply(this, arguments);
 }
 function _getCatz() {
   _getCatz = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(y) {
-    var response, jsonData;
+    var cats, response, jsonData;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.next = 2;
+          cats = [];
+          console.log(y);
+          _context2.next = 4;
           return fetch("https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&breed_ids=".concat(y, "&api_key=").concat(API_KEY));
-        case 2:
+        case 4:
           response = _context2.sent;
-          _context2.next = 5;
+          _context2.next = 7;
           return response.json();
-        case 5:
+        case 7:
           jsonData = _context2.sent;
           console.log(jsonData);
           jsonData.forEach(function (x) {
             cats.push(x);
+            //let cItem = Carousel.createCarouselItem(x.url, "image of a cat", x.id);
+            //Carousel.appendCarousel(cItem);
           });
           cats.forEach(function (x) {
             //console.log(x);
             var cItem = Carousel.createCarouselItem(x.url, "image of a cat", x.id);
             Carousel.appendCarousel(cItem);
           });
-        case 9:
+        case 11:
         case "end":
           return _context2.stop();
       }
@@ -23462,12 +23466,13 @@ function _getCatz() {
   return _getCatz.apply(this, arguments);
 }
 breedSelect.addEventListener("click", function (x) {
+  Carousel.clear();
+  initialLoad();
   console.log("clicked");
   var y = x.target.id;
+  getCatz(y);
   console.log(y);
   Carousel.start();
-  Carousel.clear();
-  getCatz(y);
 });
 
 /**
