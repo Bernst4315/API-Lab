@@ -25,14 +25,13 @@ const API_KEY = "live_Wnqd2JV4EMaQONaRroewu3pOgt2fHrYV38wu3pUObF4rzzClPL5jtTJnsw
 const breeds = [];
 async function initialLoad (){
   
-  const breedsId = []; 
+  //const breedsId = []; 
   const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&api_key=${API_KEY}`);
   const jsonData = await response.json();
   jsonData.forEach((x) => {
       breeds.push(x.breeds[0]); 
       //breedsId.push(x.breeds[0].id); //might want to place in an obj 
   })
-
 
 breeds.forEach((breed) => {
   const optionEl = document.createElement("option");
@@ -43,29 +42,20 @@ breeds.forEach((breed) => {
 })
 
 let y = breeds[0].id; 
-
 getCatz(y);
 
+
 }
+
 initialLoad();
-
-
 
 /**
  * 2. Create an event handler for breedSelect that does the following:
  * - Retrieve information on the selected breed from the cat API using fetch().
  *  - Make sure your request is receiving multiple array items!
  *  - Check the API documentation if you're only getting a single object.
- * 
- * 
- * 
- * 
  * - For each object in the response array, create a new element for the carousel.
- * 
  *  - Append each of these new elements to the carousel.
- * 
- * 
- * 
  * - Use the other data you have been given to create an informational section within the infoDump element.
  * 
  *  - Be creative with how you create DOM elements and HTML.
@@ -88,7 +78,6 @@ async function getCatz(y){
        cats.push(x);  
    })
   
-   console.log(JSON.stringify(cats[0].breeds[0]));
   infoDump.textContent = JSON.stringify(cats[0].breeds[0]);
    cats.forEach((x) => {
     let cItem = Carousel.createCarouselItem(x.url, "image of a cat", x.id);
@@ -96,7 +85,7 @@ async function getCatz(y){
     
    })
 
-   
+   Carousel.start();
   }
 
 breedSelect.addEventListener("click", (x) => {
@@ -104,10 +93,8 @@ breedSelect.addEventListener("click", (x) => {
   console.log("clicked");
   let y = x.target.id;
   getCatz(y);
-  Carousel.start();
 
 })
-
 
 /**
  * 3. Fork your own sandbox, creating a new one named "JavaScript Axios Lab."

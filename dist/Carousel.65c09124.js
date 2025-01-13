@@ -23360,18 +23360,17 @@ function initialLoad() {
 }
 function _initialLoad() {
   _initialLoad = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var breedsId, response, jsonData, y;
+    var response, jsonData, y;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          breedsId = [];
-          _context.next = 3;
+          _context.next = 2;
           return fetch("https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&api_key=".concat(API_KEY));
-        case 3:
+        case 2:
           response = _context.sent;
-          _context.next = 6;
+          _context.next = 5;
           return response.json();
-        case 6:
+        case 5:
           jsonData = _context.sent;
           jsonData.forEach(function (x) {
             breeds.push(x.breeds[0]);
@@ -23386,7 +23385,7 @@ function _initialLoad() {
           });
           y = breeds[0].id;
           getCatz(y);
-        case 11:
+        case 10:
         case "end":
           return _context.stop();
       }
@@ -23401,16 +23400,8 @@ initialLoad();
  * - Retrieve information on the selected breed from the cat API using fetch().
  *  - Make sure your request is receiving multiple array items!
  *  - Check the API documentation if you're only getting a single object.
- * 
- * 
- * 
- * 
  * - For each object in the response array, create a new element for the carousel.
- * 
  *  - Append each of these new elements to the carousel.
- * 
- * 
- * 
  * - Use the other data you have been given to create an informational section within the infoDump element.
  * 
  *  - Be creative with how you create DOM elements and HTML.
@@ -23443,12 +23434,12 @@ function _getCatz() {
           jsonData.forEach(function (x) {
             cats.push(x);
           });
-          console.log(JSON.stringify(cats[0].breeds[0]));
           infoDump.textContent = JSON.stringify(cats[0].breeds[0]);
           cats.forEach(function (x) {
             var cItem = Carousel.createCarouselItem(x.url, "image of a cat", x.id);
             Carousel.appendCarousel(cItem);
           });
+          Carousel.start();
         case 11:
         case "end":
           return _context2.stop();
@@ -23462,7 +23453,6 @@ breedSelect.addEventListener("click", function (x) {
   console.log("clicked");
   var y = x.target.id;
   getCatz(y);
-  Carousel.start();
 });
 
 /**
