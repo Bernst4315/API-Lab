@@ -23423,7 +23423,6 @@ var API_KEY = "live_Wnqd2JV4EMaQONaRroewu3pOgt2fHrYV38wu3pUObF4rzzClPL5jtTJnswXR
  * This function should execute immediately.
  */
 
-console.log(Carousel);
 var breeds = [];
 function initialLoad() {
   return _initialLoad.apply(this, arguments);
@@ -23456,11 +23455,6 @@ function _initialLoad() {
           });
           y = breeds[0].id;
           getCatz(y);
-
-          // console.log(breeds)
-          // console.log(breedsId)
-          // console.log(jsonData)
-          //return breeds;
         case 11:
         case "end":
           return _context.stop();
@@ -23505,24 +23499,22 @@ function _getCatz() {
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          cats = [];
-          console.log(y);
-          _context2.next = 4;
+          cats = []; //console.log(y);
+          _context2.next = 3;
           return fetch("https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&breed_ids=".concat(y, "&api_key=").concat(API_KEY));
-        case 4:
+        case 3:
           response = _context2.sent;
-          _context2.next = 7;
+          _context2.next = 6;
           return response.json();
-        case 7:
+        case 6:
           jsonData = _context2.sent;
-          console.log(jsonData);
+          //console.log(jsonData);
           jsonData.forEach(function (x) {
             cats.push(x);
-            //let cItem = Carousel.createCarouselItem(x.url, "image of a cat", x.id);
-            //Carousel.appendCarousel(cItem);
           });
+          console.log(JSON.stringify(cats[0].breeds[0]));
+          infoDump.textContent = JSON.stringify(cats[0].breeds[0]);
           cats.forEach(function (x) {
-            //console.log(x);
             var cItem = Carousel.createCarouselItem(x.url, "image of a cat", x.id);
             Carousel.appendCarousel(cItem);
           });
@@ -23539,7 +23531,6 @@ breedSelect.addEventListener("click", function (x) {
   console.log("clicked");
   var y = x.target.id;
   getCatz(y);
-  console.log(y);
   Carousel.start();
 });
 

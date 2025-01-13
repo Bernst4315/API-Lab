@@ -22,8 +22,6 @@ const API_KEY = "live_Wnqd2JV4EMaQONaRroewu3pOgt2fHrYV38wu3pUObF4rzzClPL5jtTJnsw
  * This function should execute immediately.
  */
 
-console.log(Carousel)
-
 const breeds = [];
 async function initialLoad (){
   
@@ -48,10 +46,6 @@ let y = breeds[0].id;
 
 getCatz(y);
 
-// console.log(breeds)
-// console.log(breedsId)
-// console.log(jsonData)
-//return breeds;
 }
 initialLoad();
 
@@ -86,37 +80,31 @@ const rotateImg = document.getElementById("carouselInner")
 
 async function getCatz(y){
    const cats = [];
-  console.log(y);
+  //console.log(y);
      const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&breed_ids=${y}&api_key=${API_KEY}`);
      const jsonData = await response.json();
-     console.log(jsonData);
+     //console.log(jsonData);
      jsonData.forEach((x) => {
        cats.push(x);  
-       //let cItem = Carousel.createCarouselItem(x.url, "image of a cat", x.id);
-    //Carousel.appendCarousel(cItem);
    })
   
-  
+   console.log(JSON.stringify(cats[0].breeds[0]));
+  infoDump.textContent = JSON.stringify(cats[0].breeds[0]);
    cats.forEach((x) => {
-    //console.log(x);
     let cItem = Carousel.createCarouselItem(x.url, "image of a cat", x.id);
     Carousel.appendCarousel(cItem);
     
    })
 
+   
   }
-
 
 breedSelect.addEventListener("click", (x) => {
    Carousel.clear();
-
   console.log("clicked");
   let y = x.target.id;
   getCatz(y);
-  console.log(y);
   Carousel.start();
-  
-  
 
 })
 
