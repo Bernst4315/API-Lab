@@ -22,6 +22,8 @@ const API_KEY = "live_Wnqd2JV4EMaQONaRroewu3pOgt2fHrYV38wu3pUObF4rzzClPL5jtTJnsw
  * This function should execute immediately.
  */
 
+console.log(Carousel)
+
 const breeds = [];
 async function initialLoad (){
   
@@ -45,6 +47,7 @@ breeds.forEach((breed) => {
 let y = breeds[0].id; 
 
 getCatz(y);
+
 // console.log(breeds)
 // console.log(breedsId)
 // console.log(jsonData)
@@ -59,9 +62,18 @@ initialLoad();
  * - Retrieve information on the selected breed from the cat API using fetch().
  *  - Make sure your request is receiving multiple array items!
  *  - Check the API documentation if you're only getting a single object.
+ * 
+ * 
+ * 
+ * 
  * - For each object in the response array, create a new element for the carousel.
+ * 
  *  - Append each of these new elements to the carousel.
+ * 
+ * 
+ * 
  * - Use the other data you have been given to create an informational section within the infoDump element.
+ * 
  *  - Be creative with how you create DOM elements and HTML.
  *  - Feel free to edit index.html and styles.css to suit your needs, but be careful!
  *  - Remember that functionality comes first, but user experience and design are important.
@@ -69,57 +81,36 @@ initialLoad();
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
 const cats = [];
-const rotateImg = document.getElementById("carouselExampleControls")
-  async function getCatz(y){
+const rotateImg = document.getElementById("carouselInner")
+  
+async function getCatz(y){
     
      const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&breed_ids=${y}&api_key=${API_KEY}`);
      const jsonData = await response.json();
+     console.log(jsonData);
      jsonData.forEach((x) => {
        cats.push(x);  
    })
   
   
    cats.forEach((x) => {
-    const newImg = document.createElement("img");
-    newImg.src = x.url; 
-    newImg.alt = "img of a cat"
-    rotateImg.appendChild(newImg)
-
+    //console.log(x);
+    let cItem = Carousel.createCarouselItem(x.url, "image of a cat", x.id);
+    Carousel.appendCarousel(cItem);
+    
    })
 
   }
 
 
 breedSelect.addEventListener("click", (x) => {
-  
-  
+   
   console.log("clicked");
   let y = x.target.id;
-  //console.log(y);
-
-  getCatz(y)
-  //console.log(cats);
-  //   cats.forEach((x) => {
-  //     console.log(x.url)
-  //   let newImg = document.createElement("img");
-  //   newImg.src = x.url; 
-  //   newImg.alt = "img of a cat"
-  //   rotateImg.appendChild(newImg)
-
-  //  })
-
-
-//console.log(breeds[0].id)
-
-
-  //console.log(cats)
-
-  // fetch(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&breed_ids=${y}&api_key=${API_KEY}`)
-  // .then(response => response.json())
-  // .then(data => console.log(data))
-
-  // let z = data[0].id
-  // console.log(z)
+  console.log(y);
+  Carousel.start();
+  Carousel.clear();
+  getCatz(y);
 
 })
 

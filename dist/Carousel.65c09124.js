@@ -23354,6 +23354,7 @@ var API_KEY = "live_Wnqd2JV4EMaQONaRroewu3pOgt2fHrYV38wu3pUObF4rzzClPL5jtTJnswXR
  * This function should execute immediately.
  */
 
+console.log(Carousel);
 var breeds = [];
 function initialLoad() {
   return _initialLoad.apply(this, arguments);
@@ -23386,6 +23387,7 @@ function _initialLoad() {
           });
           y = breeds[0].id;
           getCatz(y);
+
           // console.log(breeds)
           // console.log(breedsId)
           // console.log(jsonData)
@@ -23405,9 +23407,18 @@ initialLoad();
  * - Retrieve information on the selected breed from the cat API using fetch().
  *  - Make sure your request is receiving multiple array items!
  *  - Check the API documentation if you're only getting a single object.
+ * 
+ * 
+ * 
+ * 
  * - For each object in the response array, create a new element for the carousel.
+ * 
  *  - Append each of these new elements to the carousel.
+ * 
+ * 
+ * 
  * - Use the other data you have been given to create an informational section within the infoDump element.
+ * 
  *  - Be creative with how you create DOM elements and HTML.
  *  - Feel free to edit index.html and styles.css to suit your needs, but be careful!
  *  - Remember that functionality comes first, but user experience and design are important.
@@ -23415,7 +23426,7 @@ initialLoad();
  * - Add a call to this function to the end of your initialLoad function above to create the initial carousel.
  */
 var cats = [];
-var rotateImg = document.getElementById("carouselExampleControls");
+var rotateImg = document.getElementById("carouselInner");
 function getCatz(_x) {
   return _getCatz.apply(this, arguments);
 }
@@ -23433,16 +23444,16 @@ function _getCatz() {
           return response.json();
         case 5:
           jsonData = _context2.sent;
+          console.log(jsonData);
           jsonData.forEach(function (x) {
             cats.push(x);
           });
           cats.forEach(function (x) {
-            var newImg = document.createElement("img");
-            newImg.src = x.url;
-            newImg.alt = "img of a cat";
-            rotateImg.appendChild(newImg);
+            //console.log(x);
+            var cItem = Carousel.createCarouselItem(x.url, "image of a cat", x.id);
+            Carousel.appendCarousel(cItem);
           });
-        case 8:
+        case 9:
         case "end":
           return _context2.stop();
       }
@@ -23453,29 +23464,10 @@ function _getCatz() {
 breedSelect.addEventListener("click", function (x) {
   console.log("clicked");
   var y = x.target.id;
-  //console.log(y);
-
+  console.log(y);
+  Carousel.start();
+  Carousel.clear();
   getCatz(y);
-  //console.log(cats);
-  //   cats.forEach((x) => {
-  //     console.log(x.url)
-  //   let newImg = document.createElement("img");
-  //   newImg.src = x.url; 
-  //   newImg.alt = "img of a cat"
-  //   rotateImg.appendChild(newImg)
-
-  //  })
-
-  //console.log(breeds[0].id)
-
-  //console.log(cats)
-
-  // fetch(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&breed_ids=${y}&api_key=${API_KEY}`)
-  // .then(response => response.json())
-  // .then(data => console.log(data))
-
-  // let z = data[0].id
-  // console.log(z)
 });
 
 /**
@@ -23654,7 +23646,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49668" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65121" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
