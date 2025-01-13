@@ -109,9 +109,7 @@ async function getCatz(y){
 
 breedSelect.addEventListener("click", (x) => {
    Carousel.clear();
-   
-  
-  initialLoad()
+
   console.log("clicked");
   let y = x.target.id;
   getCatz(y);

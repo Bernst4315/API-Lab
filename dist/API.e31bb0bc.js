@@ -23536,7 +23536,6 @@ function _getCatz() {
 }
 breedSelect.addEventListener("click", function (x) {
   Carousel.clear();
-  initialLoad();
   console.log("clicked");
   var y = x.target.id;
   getCatz(y);
