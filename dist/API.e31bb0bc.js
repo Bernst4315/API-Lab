@@ -23429,19 +23429,16 @@ function initialLoad() {
 }
 function _initialLoad() {
   _initialLoad = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var response, jsonData, y;
+    var response, y;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return fetch("https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&api_key=".concat(API_KEY));
+          return _axios.default.get("https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&api_key=".concat(API_KEY));
         case 2:
           response = _context.sent;
-          _context.next = 5;
-          return response.json();
-        case 5:
-          jsonData = _context.sent;
-          jsonData.forEach(function (x) {
+          //const jsonData = await response.json();
+          response.data.forEach(function (x) {
             breeds.push(x.breeds[0]);
             //breedsId.push(x.breeds[0].id); //might want to place in an obj 
           });
@@ -23454,7 +23451,7 @@ function _initialLoad() {
           });
           y = breeds[0].id;
           getCatz(y);
-        case 10:
+        case 7:
         case "end":
           return _context.stop();
       }
@@ -23486,21 +23483,18 @@ function getCatz(_x) {
 }
 function _getCatz() {
   _getCatz = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(y) {
-    var cats, response, jsonData;
+    var cats, response;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
           cats = []; //console.log(y);
           _context2.next = 3;
-          return fetch("https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&breed_ids=".concat(y, "&api_key=").concat(API_KEY));
+          return _axios.default.get("https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&breed_ids=".concat(y, "&api_key=").concat(API_KEY));
         case 3:
           response = _context2.sent;
-          _context2.next = 6;
-          return response.json();
-        case 6:
-          jsonData = _context2.sent;
+          //const jsonData = await response.json();
           //console.log(jsonData);
-          jsonData.forEach(function (x) {
+          response.data.forEach(function (x) {
             cats.push(x);
           });
           infoDump.textContent = JSON.stringify(cats[0].breeds[0]);
@@ -23509,7 +23503,7 @@ function _getCatz() {
             Carousel.appendCarousel(cItem);
           });
           Carousel.start();
-        case 11:
+        case 8:
         case "end":
           return _context2.stop();
       }

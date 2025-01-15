@@ -26,9 +26,9 @@ const breeds = [];
 async function initialLoad (){
   
   //const breedsId = []; 
-  const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&api_key=${API_KEY}`);
-  const jsonData = await response.json();
-  jsonData.forEach((x) => {
+  const response = await axios.get(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&api_key=${API_KEY}`);
+  //const jsonData = await response.json();
+  response.data.forEach((x) => {
       breeds.push(x.breeds[0]); 
       //breedsId.push(x.breeds[0].id); //might want to place in an obj 
   })
@@ -71,10 +71,10 @@ const rotateImg = document.getElementById("carouselInner")
 async function getCatz(y){
    const cats = [];
   //console.log(y);
-     const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&breed_ids=${y}&api_key=${API_KEY}`);
-     const jsonData = await response.json();
+     const response = await axios.get(`https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1&breed_ids=${y}&api_key=${API_KEY}`);
+     //const jsonData = await response.json();
      //console.log(jsonData);
-     jsonData.forEach((x) => {
+     response.data.forEach((x) => {
        cats.push(x);  
    })
   
